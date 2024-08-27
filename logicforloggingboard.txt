@@ -1,0 +1,65 @@
+#include "LoggingBoard.h"
+#include <iostream>
+
+LoggingBoard::LoggingBoard() {}
+
+void LoggingBoard::recordMove(std::string& move) {
+    // Logic to limit the number of moves recorded
+
+    // Translate the move and add it to the respective player's move list
+    std::string translatedMove = translateMove(move);
+
+    if (whiteMoves.size() == blackMoves.size()) {
+        whiteMoves.push_back(translatedMove);
+    } else {
+        blackMoves.push_back(translatedMove);
+    }
+}
+
+void LoggingBoard::displayMoveHistory() const {
+    std::cout << "Move history:" << std::endl;
+    int moveNumber = 1;
+
+    // Display white player's moves
+    for (const auto& move : whiteMoves) {
+        std::cout << moveNumber << ". " << move;
+        moveNumber++;
+        if (moveNumber <= whiteMoves.size() + blackMoves.size()) {
+            std::cout << "\t";
+        }
+    }
+
+    // Display black player's moves
+    for (const auto& move : blackMoves) {
+        std::cout << moveNumber << ". " << move;
+        moveNumber++;
+        if (moveNumber <= whiteMoves.size() + blackMoves.size()) {
+            std::cout << "\t";
+        }
+    }
+
+    std::cout << std::endl;
+}
+
+std::string LoggingBoard::translateMove(std::string move) const {
+    // Logic to translate moves according to algebraic notation rules
+    // Implement your logic here based on the provided algebraic notation rules
+
+    // For example, if the move is "Nf3", no translation is needed
+    // For other moves, you need to check the piece type and destination and modify the move accordingly
+
+    // Sample logic:
+    if (move[0] == 'N') {
+        // Translate knight move
+        // Assuming the input move is in the format: Nf3, Ng5, etc.
+        // You may need more complex logic based on your specific needs
+        return move;
+    } else if (move[0] == 'B') {
+        // Translate bishop move
+        // Implement logic for translating bishop moves
+    }
+    // Implement logic for other pieces
+
+    // If no translation is needed, return the original move
+    return move;
+}
